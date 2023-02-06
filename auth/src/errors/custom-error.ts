@@ -7,7 +7,7 @@ export abstract class CustomError extends Error {
     super(message);
 
     //Only because we are extending a built in class
-    Object.setPrototypeOf(this, RequestValidationError.prototype);
+    // Object.setPrototypeOf(this, RequestValidationError.prototype);
   }
 
   abstract serializeErrors(): { message: string; field?: string }[];
