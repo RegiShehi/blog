@@ -5,6 +5,7 @@ import 'express-async-errors';
 import { json } from 'body-parser';
 import { errorHandler, NotFoundError, currentUser } from '@rstickets70/common';
 import { createTicketRouter } from './routes/new';
+import { showTicketRouter } from './routes/show';
 
 const app = express();
 app.set('trust proxy', true); //trust traffic behind ingress nginx proxy
@@ -19,6 +20,7 @@ app.use(
 
 app.use(currentUser);
 app.use(createTicketRouter);
+app.use(showTicketRouter);
 
 app.all('*', async (req, res, next) => {
   throw new NotFoundError();
