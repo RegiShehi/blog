@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { requireAuth, validateRequest } from '@rstickets70/common';
 import { Ticket } from '../models/ticket';
+import { requireAuth, validateRequest } from '@rstickets70/common';
 
 const router = express.Router();
 
@@ -21,7 +21,6 @@ router.post(
       price,
       userId: req.currentUser!.id
     });
-
     await ticket.save();
 
     res.status(201).send(ticket);

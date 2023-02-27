@@ -1,7 +1,7 @@
 import request from 'supertest';
 import { app } from '../../app';
-import { signin } from '../../test/setup';
 import { Ticket } from '../../models/ticket';
+import { signin } from '../../test/setup';
 
 it('has a route handler listening to /api/tickets for post requests', async () => {
   const response = await request(app).post('/api/tickets').send({});
@@ -10,12 +10,10 @@ it('has a route handler listening to /api/tickets for post requests', async () =
 });
 
 it('can only be accessed if user is signed in', async () => {
-  const response = await request(app).post('/api/tickets').send({});
-
-  expect(response.status).toEqual(401);
+  await request(app).post('/api/tickets').send({}).expect(401);
 });
 
-it('returns a status different from 401 if user is signed in', async () => {
+it('returns a status other than 401 if the user is signed in', async () => {
   const response = await request(app)
     .post('/api/tickets')
     .set('Cookie', signin())
@@ -48,7 +46,7 @@ it('returns an error if an invalid price is provided', async () => {
     .post('/api/tickets')
     .set('Cookie', signin())
     .send({
-      title: 'test',
+      title: 'asldkjf',
       price: -10
     })
     .expect(400);
@@ -57,7 +55,7 @@ it('returns an error if an invalid price is provided', async () => {
     .post('/api/tickets')
     .set('Cookie', signin())
     .send({
-      title: 'test'
+      title: 'laskdfj'
     })
     .expect(400);
 });
@@ -66,20 +64,19 @@ it('creates a ticket with valid inputs', async () => {
   let tickets = await Ticket.find({});
   expect(tickets.length).toEqual(0);
 
-  const title = 'test';
-  const price = 20;
+  const title = 'asldkfj';
 
   await request(app)
     .post('/api/tickets')
     .set('Cookie', signin())
     .send({
       title,
-      price
+      price: 20
     })
     .expect(201);
 
   tickets = await Ticket.find({});
   expect(tickets.length).toEqual(1);
-  expect(tickets[0].price).toEqual(price);
+  expect(tickets[0].price).toEqual(20);
   expect(tickets[0].title).toEqual(title);
 });
