@@ -26,24 +26,24 @@ it('returns 401 if user is not authenticated', async () => {
     .expect(401);
 });
 
-// it('returns 401 if user does not own the ticket', async () => {
-//   const response = await request(app)
-//     .post('/api/tickets')
-//     .set('Cookie', signin())
-//     .send({
-//       title: 'asldkfj',
-//       price: 20
-//     });
+it('returns 401 if user does not own the ticket', async () => {
+  const response = await request(app)
+    .post('/api/tickets')
+    .set('Cookie', signin())
+    .send({
+      title: 'asldkfj',
+      price: 20
+    });
 
-//   await request(app)
-//     .put(`/api/tickets/${response.body.id}`)
-//     .set('Cookie', signin())
-//     .send({
-//       title: 'alskdjflskjdf',
-//       price: 1000
-//     })
-//     .expect(401);
-// });
+  await request(app)
+    .put(`/api/tickets/${response.body.id}`)
+    .set('Cookie', signin())
+    .send({
+      title: 'alskdjflskjdf',
+      price: 1000
+    })
+    .expect(401);
+});
 
 it('returns 400 if user provides an invalid title or price', async () => {
   const cookie = signin();
