@@ -1,7 +1,10 @@
 import nats, { Stan } from 'node-nats-streaming';
 
 class NatsWrapper {
+  static instance: NatsWrapper;
   private _client?: Stan;
+
+  private constructor() {}
 
   get client() {
     if (!this._client) {
@@ -9,6 +12,14 @@ class NatsWrapper {
     }
 
     return this._client;
+  }
+
+  public static getInstance(): NatsWrapper {
+    if (!NatsWrapper.instance) {
+      NatsWrapper.instance = new NatsWrapper();
+    }
+
+    return NatsWrapper.instance;
   }
 
   connect(clusterId: string, clientId: string, url: string) {
@@ -28,4 +39,4 @@ class NatsWrapper {
   }
 }
 
-export const natsWrapper = new NatsWrapper();
+export const natsWrapper = NatsWrapper.getInstance();
