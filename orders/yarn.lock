@@ -1297,9 +1297,9 @@
     "@jridgewell/sourcemap-codec" "1.4.14"
 
 "@rstickets70/common@^1.0.12":
-  version "1.0.12"
-  resolved "https://registry.yarnpkg.com/@rstickets70/common/-/common-1.0.12.tgz#581095791be6560ad31d07bf325b379c5b02b2d3"
-  integrity sha512-uDxI5yS+z6j/x+0G+OImpQH6H+4eMpemnTc6XYQglCY+NFubZoU1UMMQkjljx6MQw292D8fmS3rWKxPj+r79dg==
+  version "1.0.13"
+  resolved "https://registry.yarnpkg.com/@rstickets70/common/-/common-1.0.13.tgz#1c4236ab0686b2c9fc8511902ba277a7e680776d"
+  integrity sha512-+GG8uhVfgTM62uZiBfXIkzurdK6VUxMJuK/hMnY1zm+iwr1yKtAJozFCFshikFvfxvLlRmvzX7+o1CsVJ0haKg==
   dependencies:
     cookie-session "^2.0.0"
     express "^4.18.2"
